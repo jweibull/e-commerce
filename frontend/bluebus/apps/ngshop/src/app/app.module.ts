@@ -8,11 +8,19 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 
 const routes = [
     { path: '', component: HomePageComponent },
+    { path: 'products', component: ProductListComponent }
 ];
 
 @NgModule({
-    declarations: [AppComponent, HomePageComponent, ProductListComponent],
-    imports: [BrowserModule, RouterModule.forRoot(routes)],
+    declarations: [
+        AppComponent,
+        HomePageComponent,
+        ProductListComponent
+    ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(routes)
+    ],
     providers: [],
     bootstrap: [AppComponent]
 })

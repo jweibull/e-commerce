@@ -4,16 +4,19 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authJwt = require('./helpers/jwt')
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
 // Create application from express library
 var app = express();
 
-
+const uploads = process.env.PUBLIC_UPLOADS;
 // Middleware
 app.use(express.json());
 app.use(morgan('tiny'));
-app.use(authJwt());
+app.use(uploads, express.static(__dirname + uploads));
+app.use(authJwt);
+app.use(errorHandler);
 
 
 // CORS Configuration

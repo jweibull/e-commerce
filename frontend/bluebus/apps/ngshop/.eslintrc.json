@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "bluebus",
+            "prefix": "ngshop",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "bluebus",
+            "prefix": "ngshop",
             "style": "kebab-case"
           }
         ]

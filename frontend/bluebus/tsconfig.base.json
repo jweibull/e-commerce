@@ -15,7 +15,10 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@bluebus/ui": ["libs/ui/src/index.ts"]
+            "@bluebus/orders": ["libs/orders/src/index.ts"],
+            "@bluebus/products": ["libs/products/src/index.ts"],
+            "@bluebus/ui": ["libs/ui/src/index.ts"],
+            "@bluebus/users": ["libs/users/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

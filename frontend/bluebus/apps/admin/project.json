@@ -1,7 +1,8 @@
 {
     "projectType": "application",
+    "root": "apps/admin",
     "sourceRoot": "apps/admin/src",
-    "prefix": "bluebus",
+    "prefix": "admin",
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:browser",
@@ -71,14 +72,14 @@
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {
-                "lintFilePatterns": ["apps/admin/**/*.ts", "apps/admin/**/*.html"]
+                "lintFilePatterns": ["apps/admin/src/**/*.ts", "apps/admin/src/**/*.html"]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
             "outputs": ["coverage/apps/admin"],
             "options": {
-                "jestConfig": "apps/admin/jest.config.ts",
+                "jestConfig": "apps/admin/jest.config.js",
                 "passWithNoTests": true
             }
         }

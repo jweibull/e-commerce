@@ -1,5 +1,6 @@
 {
     "projectType": "application",
+    "root": "apps/ngshop",
     "sourceRoot": "apps/ngshop/src",
     "prefix": "bluebus",
     "targets": {
@@ -71,14 +72,14 @@
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {
-                "lintFilePatterns": ["apps/ngshop/**/*.ts", "apps/ngshop/**/*.html"]
+                "lintFilePatterns": ["apps/ngshop/src/**/*.ts", "apps/ngshop/src/**/*.html"]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
             "outputs": ["coverage/apps/ngshop"],
             "options": {
-                "jestConfig": "apps/ngshop/jest.config.ts",
+                "jestConfig": "apps/ngshop/jest.config.js",
                 "passWithNoTests": true
             }
         }

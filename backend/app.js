@@ -1,21 +1,26 @@
-// Declarations 
+//Environment File
 require('dotenv/config');
+
+// Create application from express library
 const express = require('express');
+var app = express();
+
+// Declarations 
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authJwt = require('./helpers/jwt');
+const authJwt = require("./helpers/jwt");
 const errorHandler = require('./helpers/error-handler');
 
-// Create application from express library
-var app = express();
 
 const uploads = process.env.PUBLIC_UPLOADS;
+
+
 // Middleware
 app.use(express.json());
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
+app.use(authJwt());
 app.use(uploads, express.static(__dirname + uploads));
-app.use(authJwt);
 app.use(errorHandler);
 
 
@@ -30,8 +35,8 @@ const productsRoutes = require('./routes/products');
 const usersRoutes = require('./routes/users');
 const ordersRoutes = require('./routes/orders');
 
-const api = process.env.API_URL;
 
+const api = process.env.API_URL;
 app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/users`, usersRoutes);

@@ -13,7 +13,7 @@
   &-sidebar {
     position: fixed;
     width: 175px;
-    background-color: #0a1d31;
+    background-color: var(--surface-b);
     height: 100%;
     top: 0;
 
@@ -37,13 +37,13 @@
           width: 100%;
 
           a {
-            color: var(--surface-a);
+            color: var(--text-color);
             padding: 10px 15px;
             display: block;
             width: 100%;
 
             &:hover {
-              background-color: var(--blue-700);
+              background-color: var(--surface-hover);
             }
 
             i {
@@ -53,12 +53,16 @@
             }
 
             &.logout {
-              color: var(--blue-500);
+              color: var(--blue-600);
               cursor: pointer;
             }
           }
         }
       }
     }
+  }
+
+  &-page {
+    padding: 15px;
   }
 }

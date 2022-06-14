@@ -7,18 +7,22 @@ import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
+import { CategoriesService } from '../../../../libs/products/src/lib/services/categories.service';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 
 const UX_MODULE = [
   CardModule,
   ToolbarModule,
   ButtonModule,
-  TableModule
+  TableModule,
+  InputTextModule
 ];
 
 const routes = [
@@ -33,6 +37,10 @@ const routes = [
       {
         path: 'categories',
         component: CategoriesListComponent
+      },
+      {
+        path: 'categories/form',
+        component: CategoriesFormComponent
       }
     ]
   }
@@ -44,7 +52,8 @@ const routes = [
       DashboardComponent,
       ShellComponent,
       SidebarComponent,
-      CategoriesListComponent
+      CategoriesListComponent,
+      CategoriesFormComponent
     ],
     imports: [
       BrowserModule,
@@ -52,7 +61,7 @@ const routes = [
       HttpClientModule,
       UX_MODULE
     ],
-    providers: [],
+    providers: [CategoriesService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

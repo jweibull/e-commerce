@@ -16,6 +16,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 import { CategoriesService } from '../../../../libs/products/src/lib/services/categories.service';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const UX_MODULE = [
   CardModule,
@@ -59,6 +60,8 @@ const routes = [
       BrowserModule,
       RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
       HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
       UX_MODULE
     ],
     providers: [CategoriesService],

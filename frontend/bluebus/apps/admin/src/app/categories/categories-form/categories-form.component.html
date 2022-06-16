@@ -1,11 +1,11 @@
 <div class="admin-page">
-  <p-card header="Categories" subheader="List of all the categories">
+  <p-card header="Add Category" subheader="Create a new category">
       <div class="grid mb-5">
           <div class="col-12">
               <p-toolbar>
                   <div class="p-toolbar-group-left"></div>
                   <div class="p-toolbar-group-right">
-                      <p-button styleClass="p-button-primary" label="Create" icon="pi pi-plus" class="p-2"></p-button>
+                      <p-button styleClass="p-button-primary" label="Save" icon="pi pi-save" class="p-2" (click)="onSubmit()"></p-button>
                       <p-button styleClass="p-button-secondary" label="Cancel" icon="pi pi-arrow-circle-left"></p-button>
                   </div>
               </p-toolbar>
@@ -13,15 +13,17 @@
       </div>
       <div class="grid">
           <div class="col-12">
-            <form>
+            <form [formGroup]="form">
               <div class="p-fluid grid">
                 <div class="col">
                   <label for="name" class="block text-900 mb-2">Name</label>
-                  <input id="name" type="text" pInputText />
+                  <input formControlName="name" id="name" type="text" aria-describedby="name-help" [ngClass]="(hasError(name)) ? 'ng-dirty' : ''" pInputText />
+                  <small *ngIf="hasError(name)" id="name-help" class="p-error block">Name is required</small>
                 </div>
                 <div class="col">
                   <label for="icon" class="block text-900 mb-2">Icon</label>
-                  <input id="icon" type="text" pInputText />
+                  <input formControlName="icon" id="icon" type="text" [ngClass]="(hasError(icon)) ? 'ng-dirty' : ''" pInputText />
+                  <small *ngIf="hasError(icon)" id="name-help" class="p-error block">Icon is required</small>
                 </div>
               </div>
             </form>

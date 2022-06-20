@@ -8,7 +8,11 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<Category[]> {
+  public getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>('http://localhost:3000/api/v1/categories');
+  }
+
+  public createCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
 }

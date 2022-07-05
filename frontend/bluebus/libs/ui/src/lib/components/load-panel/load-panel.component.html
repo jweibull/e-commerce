@@ -1,0 +1,14 @@
+<ng-container *ngIf="isVisible()">
+  <div class="jkw-load-modal" @modal>
+    <div class="load-dialog-container">
+      <span class="load-dialog-img-span"><img class="load-dialog-img" src='../../assets/gifs/ball-expansion.gif'/></span>
+      <div class="load-dialog-text">
+        <span class="load-dialog-title">{{title}}</span>
+        <div>
+          <span class="load-dialog-message">{{message}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="jkw-overlay" @overlay></div>
+</ng-container>

@@ -1,7 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService, Category } from '@bluebus/products';
 import { MessageService } from 'primeng/api';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-form',
@@ -17,7 +19,8 @@ export class CategoriesFormComponent {
   constructor(
     private fb: FormBuilder,
     private categoriesService: CategoriesService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private location: Location
   ) {}
 
 
@@ -47,9 +50,10 @@ export class CategoriesFormComponent {
     this.categoriesService.createCategory(category).subscribe({
       next: () => {
         this.messageService.add({severity:'success', summary: 'Success', detail: 'New category was added'});
+        timer(2000).subscribe(() => this.location.back());
       },
       error: () => {
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Could not create the new category'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Could not create the new category'});
       }
     });
   }

@@ -1,0 +1,49 @@
+.jkw-overlay {
+  z-index: 999;
+  background: rgba(0,0,0, .5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+
+}
+
+.jkw-load-modal {
+  z-index: 1000;
+  background: #fff;
+  border-radius: 100px;
+  box-shadow: 0 2px 8px #333;
+  position: fixed;
+  margin-top: auto;
+  margin-left: auto;
+  padding: 10px;
+  min-width: 280px;
+  max-height: 90vmax;
+}
+
+.load-dialog-container {
+  display: table;
+}
+
+.load-dialog-img {
+  border-radius:100px;
+  width: 80px;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.load-dialog-text, .load-dialog-img-span {
+  margin-left: 10px;
+  padding-right: 20px;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.load-dialog-title {
+  font-size: 1.5rem;
+}
+
+.load-dialog-message {
+  font-size: 1.0rem;
+}

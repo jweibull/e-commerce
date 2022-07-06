@@ -15,6 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@bluebus/models": ["libs/models"],
             "@bluebus/orders": ["libs/orders/src/index.ts"],
             "@bluebus/products": ["libs/products/src/index.ts"],
             "@bluebus/ui": ["libs/ui/src/index.ts"],

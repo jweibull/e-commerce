@@ -58,4 +58,8 @@ export class CategoriesFormComponent {
     });
   }
 
+  public onCancel(): void {
+    this.location.back();
+  }
+
 }

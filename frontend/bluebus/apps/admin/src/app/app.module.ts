@@ -12,6 +12,8 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { CategoriesService } from '@bluebus/products';
 import { UiModule } from '@bluebus/ui';
@@ -29,7 +31,8 @@ const UX_MODULE = [
   ButtonModule,
   TableModule,
   InputTextModule,
-  ToastModule
+  ToastModule,
+  ConfirmDialogModule
 ];
 
 const routes = [
@@ -72,7 +75,7 @@ const routes = [
       ReactiveFormsModule,
       UX_MODULE
     ],
-    providers: [CategoriesService, MessageService],
+    providers: [CategoriesService, MessageService, ConfirmationService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

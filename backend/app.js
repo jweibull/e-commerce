@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 //Environment File
 require('dotenv/config');
 
@@ -49,7 +51,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     useUnifiedTopology: true,
     dbName: process.env.DATABASE_DEV
 }).then(() => {
-    console.log('The database server is ready...')
+    console.log('The database server is ready...');
 }).catch((err) => {
     console.log(err);
 });

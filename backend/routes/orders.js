@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 const { Order } = require('../models/order');
 const { OrderItem } = require('../models/order-item');
 const express = require('express');
@@ -8,10 +10,10 @@ router.get(`/`, async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
 
     if(!orderList) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     } 
     res.send(orderList);
-})
+});
 
 router.get(`/:id`, async (req, res) =>{
     const order = await Order.findById(req.params.id)
@@ -22,29 +24,29 @@ router.get(`/:id`, async (req, res) =>{
         });
 
     if(!order) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     } 
     res.send(order);
-})
+});
 
 router.post('/', async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             quantity: orderItem.quantity,
             product: orderItem.product
-        })
+        });
 
         newOrderItem = await newOrderItem.save();
 
         return newOrderItem._id;
-    }))
+    }));
     const orderItemsIdsResolved =  await orderItemsIds;
 
     const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
         const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
         const totalPrice = orderItem.product.price * orderItem.quantity;
-        return totalPrice
-    }))
+        return totalPrice;
+    }));
 
     const totalPrice = totalPrices.reduce((a,b) => a +b , 0);
 
@@ -59,14 +61,14 @@ router.post('/', async (req,res)=>{
         status: req.body.status,
         totalPrice: totalPrice,
         user: req.body.user,
-    })
+    });
     order = await order.save();
 
     if(!order)
-    return res.status(400).send('the order cannot be created!')
+    return res.status(400).send('the order cannot be created!');
 
     res.send(order);
-})
+});
 
 
 router.put('/:id',async (req, res)=> {
@@ -76,52 +78,52 @@ router.put('/:id',async (req, res)=> {
             status: req.body.status
         },
         { new: true}
-    )
+    );
 
     if(!order)
-    return res.status(400).send('the order cannot be update!')
+    return res.status(400).send('the order cannot be update!');
 
     res.send(order);
-})
+});
 
 
 router.delete('/:id', (req, res)=>{
     Order.findByIdAndRemove(req.params.id).then(async (order) => {
         if(order) {
             await order.orderItems.map(async orderItem => {
-                await OrderItem.findByIdAndRemove(orderItem)
-            })
-            return res.status(200).json({ success: true, message: 'The Order was Successfully Deleted!' })
+                await OrderItem.findByIdAndRemove(orderItem);
+            });
+            return res.status(200).json({ success: true, message: 'The Order was Successfully Deleted!' });
         } else {
-            return res.status(404).json({ success: false , message: `No Order found with Id = ${req.params.id}` })
+            return res.status(404).json({ success: false , message: `No Order found with Id = ${req.params.id}` });
         }
     }).catch( (err) => {
-       return res.status(500).json({ success: false, error: err }) 
-    })
-})
+       return res.status(500).json({ success: false, error: err }) ;
+    });
+});
 
 router.get('/get/totalsales', async (req, res)=> {
     const totalSales= await Order.aggregate([
         { $group: { _id: null , totalsales : { $sum : '$totalPrice'}}}
-    ])
+    ]);
 
     if(!totalSales) {
-        return res.status(400).send('The order sales cannot be generated')
+        return res.status(400).send('The order sales cannot be generated');
     }
 
-    res.send({totalsales: totalSales.pop().totalsales})
-})
+    res.send({totalsales: totalSales.pop().totalsales});
+});
 
 router.get(`/get/count`, async (req, res) =>{
-    const orderCount = await Order.countDocuments((count) => count)
+    const orderCount = await Order.countDocuments((count) => count);
 
     if(!orderCount) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     } 
     res.send({
         orderCount: orderCount
     });
-})
+});
 
 router.get(`/get/userorders/:userid`, async (req, res) =>{
     const userOrderList = await Order.find({user: req.params.userid}).populate({ 
@@ -130,9 +132,9 @@ router.get(`/get/userorders/:userid`, async (req, res) =>{
         }).sort({'dateOrdered': -1});
 
     if(!userOrderList) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     } 
     res.send(userOrderList);
-})
+});
 
 module.exports = router;

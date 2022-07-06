@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 const mongoose = require('mongoose');
 
 const orderItemSchema = mongoose.Schema({
@@ -9,7 +11,7 @@ const orderItemSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }
-})
+});
 
 exports.OrderItem = mongoose.model('OrderItem', orderItemSchema);
 

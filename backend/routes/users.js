@@ -11,7 +11,7 @@ router.get(`/`, async (req, res) =>{
     const userList = await User.find().select('-passwordHash');
 
     if(!userList) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
     res.send(userList);
 });
@@ -21,7 +21,7 @@ router.get('/:id', async(req,res)=>{
     const user = await User.findById(req.params.id).select('-passwordHash');
 
     if(!user) {
-        res.status(500).json({message: 'The user with the given ID was not found.'});
+        return res.status(500).json({message: 'The user with the given ID was not found.'});
     } 
     res.status(200).send(user);
 });
@@ -43,7 +43,7 @@ router.post('/', async (req,res)=>{
     user = await user.save();
 
     if(!user)
-    return res.status(400).send('the user cannot be created!');
+        return res.status(400).send('the user cannot be created!');
 
     res.send(user);
 });
@@ -77,7 +77,7 @@ router.put('/:id',async (req, res)=> {
     );
 
     if(!user)
-    return res.status(400).send('the user cannot be created!');
+        return res.status(400).send('the user cannot be created!');
 
     res.send(user);
 });
@@ -123,7 +123,7 @@ router.post('/register', async (req,res)=>{
     user = await user.save();
 
     if(!user)
-    return res.status(400).send('the user cannot be created!');
+        return res.status(400).send('the user cannot be created!');
 
     res.send(user);
 });
@@ -146,11 +146,9 @@ router.get(`/get/count`, async (req, res) =>{
     const userCount = await User.countDocuments((count) => count);
 
     if(!userCount) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
-    res.send({
-        userCount: userCount
-    });
+    res.send({ userCount: userCount });
 });
 
 

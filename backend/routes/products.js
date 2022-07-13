@@ -43,7 +43,7 @@ router.get(`/`, async (req, res) =>{
     const productList = await Product.find(filter).populate('category');
 
     if(!productList) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
     res.send(productList);
 });
@@ -53,7 +53,7 @@ router.get(`/:id`, async (req, res) =>{
     const product = await Product.findById(req.params.id).populate('category');
 
     if(!product) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
     res.send(product);
 });
@@ -152,11 +152,9 @@ router.get(`/get/count`, async (req, res) =>{
     const productCount = await Product.countDocuments((count) => count);
 
     if(!productCount) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
-    res.send({
-        productCount: productCount
-    });
+    res.send({ productCount: productCount });
 });
 
 
@@ -165,7 +163,7 @@ router.get(`/get/featured/:count`, async (req, res) =>{
     const products = await Product.find({isFeatured: true}).limit(+count);
 
     if(!products) {
-        res.status(500).json({success: false});
+        return res.status(500).json({success: false});
     } 
     res.send(products);
 });

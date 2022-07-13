@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@bluebus/products';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -11,7 +12,8 @@ export class CategoriesListComponent implements OnInit{
   constructor(
     private categoriesService: CategoriesService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -19,13 +21,13 @@ export class CategoriesListComponent implements OnInit{
   }
 
   public onDelete(event: Event, category: Category): void {
-    if (category.id) {
+    if (category) {
       this.confirmationService.confirm({
-        message: 'Are you sure that you want to proceed?',
+        message: `Are you sure that you want to delete the <em>${category.name}</em> category?`,
         header: 'Delete Category?',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.categoriesService.deleteCategory(category.id!).subscribe({
+          this.categoriesService.deleteCategory(category.id as string).subscribe({
             next: () => {
               this.messageService.add({severity:'success', summary: 'Success', detail: 'Category succesfully deleted'});
               this.refreshData();
@@ -36,14 +38,15 @@ export class CategoriesListComponent implements OnInit{
           });
         },
         reject: () => {
-          this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+          // this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
         }
       });
     }
   }
 
-  public onEdit(category: Category): void {
-    console.log(category);
+  public onEdit(categoryId: string): void {
+    console.log(categoryId);
+    this.router.navigateByUrl(`categories/form/${categoryId}`);
   }
 
   private refreshData(): void {

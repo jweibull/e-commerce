@@ -10,7 +10,7 @@ router.get(`/`, async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
 
     if(!orderList) {
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     } 
     res.send(orderList);
 });
@@ -24,7 +24,7 @@ router.get(`/:id`, async (req, res) =>{
         });
 
     if(!order) {
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     } 
     res.send(order);
 });
@@ -65,7 +65,7 @@ router.post('/', async (req,res)=>{
     order = await order.save();
 
     if(!order)
-    return res.status(400).send('the order cannot be created!');
+        return res.status(400).send('the order cannot be created!');
 
     res.send(order);
 });
@@ -81,7 +81,7 @@ router.put('/:id',async (req, res)=> {
     );
 
     if(!order)
-    return res.status(400).send('the order cannot be update!');
+        return res.status(400).send('the order cannot be update!');
 
     res.send(order);
 });
@@ -118,11 +118,9 @@ router.get(`/get/count`, async (req, res) =>{
     const orderCount = await Order.countDocuments((count) => count);
 
     if(!orderCount) {
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     } 
-    res.send({
-        orderCount: orderCount
-    });
+    res.send({ orderCount: orderCount });
 });
 
 router.get(`/get/userorders/:userid`, async (req, res) =>{
@@ -132,7 +130,7 @@ router.get(`/get/userorders/:userid`, async (req, res) =>{
         }).sort({'dateOrdered': -1});
 
     if(!userOrderList) {
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     } 
     res.send(userOrderList);
 });

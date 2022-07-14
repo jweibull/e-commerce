@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 import { CategoriesService } from '@bluebus/products';
 import { UiModule } from '@bluebus/ui';
@@ -32,7 +33,8 @@ const UX_MODULE = [
   TableModule,
   InputTextModule,
   ToastModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  ColorPickerModule
 ];
 
 const routes = [

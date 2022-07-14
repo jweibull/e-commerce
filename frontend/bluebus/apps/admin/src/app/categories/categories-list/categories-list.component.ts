@@ -45,7 +45,6 @@ export class CategoriesListComponent implements OnInit{
   }
 
   public onEdit(categoryId: string): void {
-    console.log(categoryId);
     this.router.navigateByUrl(`categories/form/${categoryId}`);
   }
 

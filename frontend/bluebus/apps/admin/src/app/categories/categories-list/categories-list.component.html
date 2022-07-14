@@ -16,17 +16,22 @@
                 <p-table [value]="categories" responsiveLayout="scroll" styleClass="p-datatable-gridlines">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Id</th>
-                            <th>Name</th>
+                            <!-- <th>Id</th> -->
+                            <th pSortableColumn="name">
+                              <p-sortIcon field="name"></p-sortIcon>
+                              Name
+                            </th>
                             <th>Icon</th>
+                            <th>Color</th>
                             <th></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-category>
                         <tr>
-                            <td>{{category.id}}</td>
+                            <!-- <td>{{category.id}}</td> -->
                             <td>{{category.name}}</td>
-                            <td>{{category.icon}}</td>
+                            <td><i style="font-size: 2rem;" [ngClass]="'pi pi-' + category.icon"></i></td>
+                            <td><div class="w-2rem h-2rem border-circle" [style]="'background-color:' + category.color + ';'"></div></td>
                             <td>
                               <button pButton class="p-button-danger  mr-2" icon="pi pi-trash" (click)="onDelete($event, category)"></button>
                               <button pButton class="p-button-error" icon="pi pi-pencil" (click)="onEdit(category.id)"></button>

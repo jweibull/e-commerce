@@ -12,10 +12,12 @@ import { timer, Subscription } from 'rxjs';
     templateUrl: './categories-form.component.html'
 })
 export class CategoriesFormComponent implements OnInit, OnDestroy {
-    public form = this.fb.group({
-        name: ['', [Validators.required]],
-        icon: ['', [Validators.required]]
+    public form= this.fb.group({
+      name: ['', [Validators.required]],
+      icon: ['', [Validators.required]],
+      color: ['#ffffff']
     });
+
     public dialogMode: CategoriesFormMode = {
         editMode: false,
         title: 'Add Category',
@@ -65,6 +67,10 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
         return this.form.controls?.['icon'];
     }
 
+    public get color(): AbstractControl {
+      return this.form.controls?.['color'];
+  }
+
     public hasError(control: AbstractControl): boolean {
         if (control.invalid && (control.dirty || control.touched)) {
             return true;
@@ -78,7 +84,8 @@ export class CategoriesFormComponent implements OnInit, OnDestroy {
         }
         const category: Category = {
             name: this.name.value,
-            icon: this.icon.value
+            icon: this.icon.value,
+            color: this.color.value
         };
         if (this.dialogMode.editMode) {
             this.updateCategory(category);

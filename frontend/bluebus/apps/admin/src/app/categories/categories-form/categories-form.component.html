@@ -26,6 +26,10 @@
                   <input formControlName="icon" id="icon" type="text" [ngClass]="(hasError(icon)) ? 'ng-dirty' : ''" pInputText />
                   <small *ngIf="hasError(icon)" id="name-help" class="p-error block">Icon is required</small>
                 </div>
+                <div class="col">
+                  <label for="color" class="block text-900 mb-2">Color</label>
+                  <p-colorPicker formControlName="color">{{color}}</p-colorPicker>
+                </div>
               </div>
             </form>
           </div>
